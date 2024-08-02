@@ -1,7 +1,7 @@
 // VARIABLES
 const input = document.getElementById("number")
 const btn = document.getElementById("convert-btn")
-const output = document.getElementById("output")
+let output = document.getElementById("output")
 
 // EVENT LISTENERS
 btn.addEventListener('click', () => {
@@ -32,31 +32,28 @@ function inputChecker() {
 function converter(x) {
   const inputArray = [...`${x}`].map(Number).reverse()
   const romanToArabicRuler = [["I", "V"], ["X", "L"], ["C", "D"], ["M"]]
+  let romanArray = []
 
   for (const key in inputArray) {
     const currentNumber = inputArray[key]
     const romanNumber = romanToArabicRuler[key]
-    const fiveBreak = Number("4" + "0".repeat(key))
-    const classBreak = Number("9" + "0".repeat(key))
 
     if (currentNumber < 4) {
-      
+      romanArray.push(romanNumber[0].repeat(inputArray[key]))
+    } else if (currentNumber > 4) {
+      if (currentNumber === 9) {
+        romanArray.push(romanNumber[0] + romanToArabicRuler[Number(key) + 1][0])
+
+      } else {
+        romanArray.push(romanNumber[1] + (romanNumber[0].repeat(inputArray[key] - 5)))
+
+      }
+    } else {
+      romanArray.push(romanNumber[0] + romanNumber[1])
+      console.log(romanNumber[0] + romanNumber[1])
     }
-
-    console.log(fiveBreak)
-    console.log(classBreak)
-    // console.log(romanNumber.repeat(currentNumber))
   }
-  
-  if (inputArray.length ) {
-    
-  }
-
-  if (input <= 3) {
-    input * "I"
-  } else {
-    "IV"
-  }
+  output.innerText= romanArray.reverse().join("")
 }
 
 /*
