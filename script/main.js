@@ -3,6 +3,9 @@ const input = document.getElementById("number")
 const btn = document.getElementById("convert-btn")
 let output = document.getElementById("output")
 
+// EXTRA
+input.focus()
+
 // EVENT LISTENERS
 btn.addEventListener('click', () => {
   inputChecker()
@@ -14,6 +17,7 @@ input.addEventListener('keydown', (e) => {
   }
   if (e.key != "Enter") {
     output.innerText = ""
+    output.style.fontSize = "1.3rem"
   }
 })
 
@@ -25,8 +29,10 @@ function inputChecker() {
     output.innerText = "Please enter a valid number"
   } else if (inputInt <= 0) {
     output.innerText = "Please enter a number greater than or equal to 1"
+    output.style.fontSize = "1rem"
   } else if (inputInt >= 4000) {
     output.innerText = "Please enter a number less than or equal to 3999"
+    output.style.fontSize = "1rem"
   } else {
     converter(inputInt)
   }
